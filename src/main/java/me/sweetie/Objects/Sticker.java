@@ -3,17 +3,17 @@ package me.sweetie.Objects;
 import org.json.JSONObject;
 
 public class Sticker {
-    private int chatId;
+    private String chatId;
     private String sticker;
     private boolean disableNotification = false;
     private int replyToMessageId = -1;
     private JSONObject replyMarkup;
-    public Sticker(int chatId, String sticker){
+    public Sticker(String chatId, String sticker){
         this.chatId = chatId;
         this.sticker = sticker;
     }
 
-    public int getChatId() {
+    public String getChatId() {
         return chatId;
     }
 

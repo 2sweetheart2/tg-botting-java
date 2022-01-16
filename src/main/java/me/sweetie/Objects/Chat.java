@@ -11,8 +11,8 @@ public class Chat {
     private String type;
 
 
-    public int getId() {
-        return Integer.parseInt(id.replace("-100",""));
+    public String getId() {
+        return id;
     }
 
     public Chat setTitle(String title) {

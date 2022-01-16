@@ -3,7 +3,7 @@ package me.sweetie.Objects;
 import org.json.JSONObject;
 
 public class SendMessage {
-    private long chatId;
+    private String chatId;
     private String text;
     private String parseMod;
     private boolean disableWebPagePreview = false;
@@ -12,13 +12,13 @@ public class SendMessage {
     private JSONObject replyMarkup;
 
 
-    public SendMessage(String text, long chatId) {
+    public SendMessage(String text, String chatId) {
         this.chatId = chatId;
         this.text = text;
     }
 
 
-    public long getChatId() {
+    public String getChatId() {
         return chatId;
     }
 

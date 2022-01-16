@@ -60,10 +60,10 @@ public class Bot {
     public void sendSticker(Sticker sticker){
         HttpsRequsts.method("sendSticker",sticker,(response, code) -> {});
     }
-    public void kick(int chatId, int userId,ProcessOutput callback){
+    public void kick(String chatId, int userId,ProcessOutput callback){
         HttpsRequsts.method("kickChatMember","chat_id="+chatId+"&user_id="+userId,callback);
     }
-    public void unban(int chatId, int userId,ProcessOutput callback){
+    public void unban(String chatId, int userId,ProcessOutput callback){
         HttpsRequsts.method("unbanChatMember","chat_id="+chatId+"&user_id="+userId,callback);
     }
 

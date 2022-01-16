@@ -15,9 +15,7 @@ public class ObjectToParams {
     public static String castMessageToParams(SendMessage message) {
         StringBuilder text = new StringBuilder();
         text.append(toUTF8("text")).append('=').append(toUTF8(message.getText())).append("&");
-        if (message.getChatId() < 0)
-            text.append(toUTF8("chat_id")).append('=').append(toUTF8(castToChatId((int)message.getChatId()))).append("&");
-        else text.append(toUTF8("chat_id")).append('=').append(toUTF8(String.valueOf(message.getChatId()))).append("&");
+        text.append(toUTF8("chat_id")).append('=').append(message.getChatId()).append("&");
         if (message.getParseMod() != null)
             text.append(toUTF8("parse_mode")).append('=').append(toUTF8(message.getParseMod())).append('&');
         text.append(toUTF8("disable_web_page_preview")).append('=').append(toUTF8(String.valueOf(message.isDisableWebPagePreview()))).append("&");
@@ -44,7 +42,7 @@ public class ObjectToParams {
 
     public static String castStickerToParam(Sticker sticker){
         StringBuilder text = new StringBuilder();
-        text.append("chat_id=").append(castToChatId(sticker.getChatId())).append("&");
+        text.append("chat_id=").append(sticker.getChatId()).append("&");
         text.append("sticker=").append(sticker.getSticker()).append("&");
         text.append("disable_notification=").append(sticker.isDisableNotification()).append("&");
         if(sticker.getReplyToMessageId()!=-1) text.append("reply_to_message_id=").append(sticker.getReplyToMessageId()).append("&");
