@@ -17,11 +17,11 @@ import java.util.logging.Logger;
 public class Bot {
     private static String TOKEN;
     private static long ID;
-    private static List<String> PREFIX = new ArrayList<>();
+    private static List<String> PREFIX;
     public static Logger log = Logger.getLogger(Bot.class.getName());
     private static boolean flag = false;
 
-    public Bot(@NotNull String token, String[] PREFIXS) {
+    public Bot(@NotNull String token, List<String> PREFIXS) {
         TOKEN = token;
         setPREFIX(PREFIXS);
     }
@@ -30,9 +30,9 @@ public class Bot {
         this.flag = flag;
     }
 
-    private boolean setPREFIX(String[] prefix) {
+    private boolean setPREFIX(List<String> prefix) {
         if (PREFIX != null) return false;
-        PREFIX = Arrays.asList(prefix);
+        PREFIX = prefix;
         return true;
     }
 

@@ -75,17 +75,17 @@ public class EventHandler {
                     break;
                 }
                 currentMessage = m;
-                if (m.getText() != null) {
+                if (m.getText()!=null) {
                     for(String i : Bot.getPREFIX()){
                         if(m.getText().startsWith(i)){
                             Callback r = Search(m.getText().replace(i, ""));
                             if (r != null) r.cumback(m,args);
-                            if (Bot.getBreakAfterCommand()) break;
+                            break;
                         }
                     }
+                    if (Bot.getBreakAfterCommand()) break;
                 }
 
-                System.out.println("NEW EVENT="+type+"\n"+o);
                 onMessageNew(m);
                 break;
             }
