@@ -19,6 +19,7 @@ public class LongPoll extends EventHandler {
         addres = "https://api.telegram.org/bot" + token + "/getUpdates";
         ts = 0;
         run();
+
     }
 
     protected void run() {
@@ -34,14 +35,17 @@ public class LongPoll extends EventHandler {
         );
     }
 
+    private volatile boolean start = false;
+
     private void handleUpdates() {
         if (addres == null) {
             Bot.log.log(Level.WARNING, "Getting LongPoll server was failed");
             return;
         }
-        onReady();
+        start = true;
         Bot.log.info("LongPoll handler started to handle events");
         try {
+            onReady();
             while (true) {
                 HttpsRequsts.sendPost("getLongPollServices/" + addres, "offset=" + ts, (response, code) -> {
                     if (response.getBoolean("ok")) {
@@ -65,10 +69,6 @@ public class LongPoll extends EventHandler {
         return addres;
     }
 
-    public void onCommand(String command) {
-        regCommand(command);
-    }
 
-    protected void onReady() {
-    }
+
 }

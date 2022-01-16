@@ -1,36 +1,42 @@
 package me.sweetie.main;
 
+import me.sweetie.Interfaces.Callback;
 import me.sweetie.Interfaces.ProcessOutput;
 import me.sweetie.Objects.SendMessage;
+import me.sweetie.Objects.SendPhoto;
+import me.sweetie.Objects.Sticker;
 import me.sweetie.requsts.HttpsRequsts;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class Bot {
     private static String TOKEN;
     private static long ID;
-    private static String PREFIX;
+    private static List<String> PREFIX = new ArrayList<>();
     public static Logger log = Logger.getLogger(Bot.class.getName());
     private static boolean flag = false;
 
-    public Bot(@NotNull String token, String PREFIX) {
+    public Bot(@NotNull String token, String[] PREFIXS) {
         TOKEN = token;
-        setPREFIX(PREFIX);
+        setPREFIX(PREFIXS);
     }
 
     public void setBreakAfterCommand(boolean flag) {
         this.flag = flag;
     }
 
-    private boolean setPREFIX(String prefix) {
+    private boolean setPREFIX(String[] prefix) {
         if (PREFIX != null) return false;
-        PREFIX = prefix;
+        PREFIX = Arrays.asList(prefix);
         return true;
     }
 
-    public static String getPREFIX() {
+    public static List<String> getPREFIX() {
         return PREFIX;
     }
 
@@ -43,10 +49,22 @@ public class Bot {
     }
 
 
-    public boolean sendMessage(SendMessage message) {
+    public void sendMessage(SendMessage message) {
         HttpsRequsts.method("sendMessage", message, (response, code) -> {
         });
-        return true;
+    }
+
+    public void sendPhoto(SendPhoto message){
+        HttpsRequsts.method("sendPhoto",message,(response, code) -> {});
+    }
+    public void sendSticker(Sticker sticker){
+        HttpsRequsts.method("sendSticker",sticker,(response, code) -> {});
+    }
+    public void kick(int chatId, int userId,ProcessOutput callback){
+        HttpsRequsts.method("kickChatMember","chat_id="+chatId+"&user_id="+userId,callback);
+    }
+    public void unban(int chatId, int userId,ProcessOutput callback){
+        HttpsRequsts.method("unbanChatMember","chat_id="+chatId+"&user_id="+userId,callback);
     }
 
     public void sendMethd(String method, String args, ProcessOutput callback) {
@@ -56,6 +74,8 @@ public class Bot {
             e.printStackTrace();
         }
     }
+
+    public void onReady(){}
 
 
 }

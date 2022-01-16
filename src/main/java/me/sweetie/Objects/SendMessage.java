@@ -11,7 +11,8 @@ public class SendMessage {
     private int replyToMessageId = -1;
     private JSONObject replyMarkup;
 
-    public SendMessage(String text, long chatId){
+
+    public SendMessage(String text, long chatId) {
         this.chatId = chatId;
         this.text = text;
     }
@@ -25,12 +26,12 @@ public class SendMessage {
         return text;
     }
 
-    public SendMessage setParseMod(String parseMod){
+    public SendMessage setParseMod(String parseMod) {
         this.parseMod = parseMod;
         return this;
     }
 
-    public String getParseMod(){
+    public String getParseMod() {
         return parseMod;
     }
 
@@ -38,7 +39,7 @@ public class SendMessage {
         return disableWebPagePreview;
     }
 
-    public SendMessage setDisableWebPagePreview(boolean disableWebPagePreview){
+    public SendMessage setDisableWebPagePreview(boolean disableWebPagePreview) {
         this.disableWebPagePreview = disableWebPagePreview;
         return this;
     }

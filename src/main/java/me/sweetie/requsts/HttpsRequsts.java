@@ -3,6 +3,8 @@ package me.sweetie.requsts;
 import me.sweetie.Interfaces.ProcessOutput;
 import me.sweetie.LongPollStuff.LongPoll;
 import me.sweetie.Objects.SendMessage;
+import me.sweetie.Objects.SendPhoto;
+import me.sweetie.Objects.Sticker;
 import me.sweetie.Utils.ObjectToParams;
 import me.sweetie.main.Bot;
 import org.json.JSONException;
@@ -82,8 +84,22 @@ public class HttpsRequsts {
                     sendPost(method, params, callback);
                     break;
                 }
-                case "groups.getLongPollServer": {
+                case "groups.getLongPollServer":
+                case "kickChatMember":
+                case "unbanChatMember": {
                     sendPost(method, (String) obj, callback);
+                    break;
+                }
+                case "sendPhoto":{
+                    SendPhoto msg = (SendPhoto) obj;
+                    String params = ObjectToParams.castPhotoToParams(msg);
+                    sendPost(method,params,callback);
+                    break;
+                }
+                case "sendSticker":{
+                    Sticker stk = (Sticker) obj;
+                    String params = ObjectToParams.castStickerToParam(stk);
+                    sendPost(method,params,callback);
                     break;
                 }
             }
